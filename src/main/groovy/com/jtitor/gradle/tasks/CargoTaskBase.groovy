@@ -16,13 +16,6 @@ class CargoTask extends TaskBase {
 	Boolean veryVerbose = false
 
 	/**
-	Disables all standard output from Cargo.
-	If true, this will call Cargo with the --quiet flag.
-	*/
-	@Input
-	Boolean quiet = false
-
-	/**
 	Requires that Cargo.lock and the cache are up to date.
 	If true, this will call Cargo with the --frozen flag.
 	*/
@@ -63,6 +56,26 @@ class CargoTask extends TaskBase {
 	*/
 	@Input
 	String manifestPath = ""
+
+	/**
+	Generates the Cargo string corresponding to the given action,
+	with flags set to the task's values.
+	*/	
+	String invocationForCargoAction(String actionName) {
+		String result = "cargo " + actionName
+		if(veryVerbose) {
+			result += " -vv"
+		}
+		else if (verbose) {
+			result += " --verbose"
+		}
+		if(frozen) {
+			result += " --frozen"
+		}
+		if(locked) {
+			result += " --locked"
+		}
+	}
 
 	void applyManifest() {
 		manifest.attributes("Verbose" : verbose)
