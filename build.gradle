@@ -1,4 +1,4 @@
-group 'com.arielcabib'
+group 'com.jtitor'
 version '0.1.1'
 
 buildscript {
@@ -31,15 +31,15 @@ dependencies {
 }
 
 pluginBundle {
-    website = 'https://github.com/ArielCabib/rust-gradle-plugin'
-    vcsUrl = 'https://github.com/ArielCabib/rust-gradle-plugin'
-    description = 'A rust plugin for gradle'
-    tags = ['rust', 'cargo']
+    website = 'https://github.com/jTitor/rust-gradle-plugin'
+    vcsUrl = 'https://github.com/jTitor/rust-gradle-plugin'
+    description = 'Fork of ArielCabib\'s Rust plugin.'
+    tags = ['rust', 'cargo', 'rustlang']
 
     plugins {
         greetingsPlugin {
-            id = 'com.arielcabib.rust'
-            displayName = 'Rust gradle plugin'
+            id = 'com.jtitor.rust'
+            displayName = 'Rust Support Plugin'
         }
     }
 }

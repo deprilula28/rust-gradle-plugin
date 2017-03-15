@@ -84,8 +84,15 @@ This isn't part of cargo out of the box; it requires a `cargo install rustfmt` i
 ### Needed Parameters
 TODO
 ### Command Parameters
+#### Cargo Fmt
 * -q, --quiet         no output printed to stdout
 * -v, --verbose       use verbose output
+#### Rustfmt
+* --write-mode [replace|overwrite|display|diff|coverage|checkstyle]: Mode to write in (not usable when piping from stdin)
+* --skip-children: Don't reformat child modules
+* --config-help: Show details of rustfmt configuration options
+* --config-path [Path for the configuration file]: Recursively searches the given path for the rustfmt.toml config file. If not found reverts to the input file path
+* --file-lines JSON: Format specified line ranges. See README for more detail on the JSON format.
 ### Command Details
 This utility formats all bin and lib files of the current crate using rustfmt. Arguments after `--` are passed to rustfmt.
 ### Expected Results
