@@ -62,19 +62,40 @@ class CargoTask extends TaskBase {
 	with flags set to the task's values.
 	*/	
 	String invocationForCargoAction(String actionName) {
-		String result = "cargo " + actionName
+		StringBuilder result = new StringBuilder("cargo ")
+		result.append(actionName)
 		if(veryVerbose) {
-			result += " -vv"
+			result.append(" -vv")
 		}
 		else if (verbose) {
-			result += " --verbose"
+			result.append(" --verbose")
+		}
+		if (quiet) {
+			result.append(" --quiet")
 		}
 		if(frozen) {
-			result += " --frozen"
+			result.append(" --frozen")
 		}
 		if(locked) {
-			result += " --locked"
+			result.append(" --locked")
 		}
+		if(release) {
+			result.append(" --release")
+		}
+		if(package?.trim()) {
+			result.append(" --package ")
+			result.append(package)
+		}
+		if(target?.trim()) {
+			result.append(" --target ")
+			result.append(target)
+		}
+		if(manifestPath?.trim()) {
+			result.append(" --manifest-path ")
+			result.append(manifestPath)
+		}
+
+		return result.toString()
 	}
 
 	void applyManifest() {

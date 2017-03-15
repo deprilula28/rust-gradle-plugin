@@ -21,7 +21,8 @@ class TaskBase extends DefaultTask {
 	@Input
 	Boolean quiet = false
 
-	void applyManifest() {
-		manifest.attributes("Verbose" : verbose)
+	void logTaskStart(String taskName) {
+		String toPrint = "Starting Cargo task: " + taskName
+		println toPrint
 	}
 }
