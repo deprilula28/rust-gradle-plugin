@@ -6,6 +6,7 @@ Rust output always goes in the following format:
 	/doc							Documentation
 
 #Needed Tasks
+In general, output from commands should always be kept as task output.
 We need some basic tasks:
 ##Build
 Generates crate artifacts.
@@ -31,6 +32,11 @@ Generates crate artifacts.
 		--message-format FMT         Error format: human, json [default: human]
 		--frozen                     Require Cargo.lock and cache are up to date
 		--locked                     Require Cargo.lock is up to date
+###Expected Results
+* Output folder /target/... actually contains artifacts.
+* Said artifacts are actually modified if a prior version existed on disk.
+####Failure Only
+* Task throws an exception.
 
 ## Test
 Runs test functions specified in source.
@@ -63,6 +69,10 @@ Default is blank.
 --no-fail-fast               Run all tests regardless of failure
 --frozen                     Require Cargo.lock and cache are up to date
 --locked                     Require Cargo.lock is up to date
+###Expected Results
+* Test results are listed to output.
+####Failure Only
+* Task throws an exception.
 
 ##Format
 Reformats source to common style guidelines.
@@ -72,10 +82,48 @@ This isn't part of cargo out of the box; it requires a `cargo install rustfmt` i
 ###Needed Parameters
 TODO
 ###Command Parameters
+-q, --quiet         no output printed to stdout
+-v, --verbose       use verbose output
+###Command Details
+This utility formats all bin and lib files of the current crate using rustfmt. Arguments after `--` are passed to rustfmt.
+###Expected Results
+####Failure Only
+* Task throws an exception.
 
 ##Run
 ###Command
 `cargo run`
+###Needed Parameters
+TODO
+###Command Parameters
+--bin NAME              Name of the bin target to run
+--example NAME          Name of the example target to run
+-j N, --jobs N          Number of parallel jobs, defaults to # of CPUs
+--release               Build artifacts in release mode, with optimizations
+--features FEATURES     Space-separated list of features to also build
+--all-features          Build all available features
+--no-default-features   Do not build the `default` feature
+--target TRIPLE         Build for the target triple
+--manifest-path PATH    Path to the manifest to execute
+-v, --verbose ...       Use verbose output (-vv very verbose/build.rs output)
+-q, --quiet             No output printed to stdout
+--color WHEN            Coloring: auto, always, never
+--message-format FMT    Error format: human, json [default: human]
+--frozen                Require Cargo.lock and cache are up to date
+--locked                Require Cargo.lock is up to date
+###Command Details
+If neither `--bin` nor `--example` are given, then if the project only has one
+bin target it will be run. Otherwise `--bin` specifies the bin target to run,
+and `--example` specifies the example target to run. At most one of `--bin` or
+`--example` can be provided.
+
+All of the trailing arguments are passed to the binary to run. If you're passing
+arguments to both Cargo and the binary, the ones after `--` go to the binary,
+the ones before go to Cargo.
+###Expected Results
+Program output is printed to output.
+####Failure Only
+Task throws an exception.
 
 #Optional Tasks
 Additionally, we would like:
@@ -103,6 +151,11 @@ TODO
 --message-format FMT         Error format: human, json [default: human]
 --frozen                     Require Cargo.lock and cache are up to date
 --locked                     Require Cargo.lock is up to date
+###Expected Results
+* Output folder /target/... actually contains documentation artifacts.
+* Said artifacts are actually modified if a prior version existed on disk.
+####Failure Only
+* Task throws an exception.
 
 ##Benchmark
 ###Command
@@ -130,6 +183,10 @@ Default is blank.
 --message-format FMT         Error format: human, json [default: human]
 --frozen                     Require Cargo.lock and cache are up to date
 --locked                     Require Cargo.lock is up to date
+###Expected Results
+* Benchmark results are printed to output.
+####Failure Only
+* Task throws an exception. This could happen if a rebuild is needed and the rebuild failed.
 
 ##Clean
 Removes output artifacts.
@@ -147,6 +204,10 @@ TODO
 --color WHEN                 Coloring: auto, always, never
 --frozen                     Require Cargo.lock and cache are up to date
 --locked                     Require Cargo.lock is up to date
+###Expected Results
+* /target/... is deleted.
+####Failure Only
+* Task throws an exception.
 
 ##Publish
 Publishes crate to a host.
@@ -167,6 +228,9 @@ TODO
 --color WHEN             Coloring: auto, always, never
 --frozen                 Require Cargo.lock and cache are up to date
 --locked                 Require Cargo.lock is up to date
+###Expected Results
+####Failure Only
+* Task throws an exception.
 
 ##Update
 Updates dependencies as specified in Cargo.lock.
@@ -184,3 +248,6 @@ TODO
 --color WHEN                 Coloring: auto, always, never
 --frozen                     Require Cargo.lock and cache are up to date
 --locked                     Require Cargo.lock is up to date
+###Expected Results
+####Failure Only
+* Task throws an exception.
