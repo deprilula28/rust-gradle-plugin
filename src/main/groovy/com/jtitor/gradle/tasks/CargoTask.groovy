@@ -5,7 +5,7 @@ import com.jtitor.plugin.gradle.rust.tasks.TaskBase
 /**
 Base class for tasks that call out to Cargo.
 */
-class CargoTask extends TaskBase {
+abstract class CargoTask extends TaskBase {
 
 	/**
 	Adds even more verbose output than the verbose flag.
@@ -58,12 +58,19 @@ class CargoTask extends TaskBase {
 	String manifestPath = ""
 
 	/**
+	Returns the Cargo action this task represents,
+	such as build, test, or bench.
+	This should be lowercase.
+	*/
+	abstract String actionName()
+
+	/**
 	Generates the Cargo string corresponding to the given action,
 	with flags set to the task's values.
 	*/	
-	String invocationForCargoAction(String actionName) {
+	String invocationForAction() {
 		StringBuilder result = new StringBuilder("cargo ")
-		result.append(actionName)
+		result.append(actionName())
 		if(veryVerbose) {
 			result.append(" -vv")
 		}
@@ -98,7 +105,15 @@ class CargoTask extends TaskBase {
 		return result.toString()
 	}
 
-	void applyManifest() {
-		manifest.attributes("Verbose" : verbose)
+	/**
+	Invokes Cargo task.
+	*/
+	@TaskAction
+	void doCargoAction() {
+		logTaskStart(actionName())
+		//Do a cargo build.
+		project.exec {
+			commandLine invocationForAction()
+		}
 	}
 }
