@@ -1,6 +1,7 @@
 package com.jtitor.plugin.gradle.rust.tasks
 
 import com.jtitor.plugin.gradle.rust.tasks.TaskBase
+import org.gradle.api.tasks.TaskAction
 
 /**
 Base class for tasks that call out to Cargo.

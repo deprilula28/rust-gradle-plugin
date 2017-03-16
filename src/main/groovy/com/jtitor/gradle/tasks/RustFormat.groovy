@@ -1,7 +1,6 @@
 package com.jtitor.plugin.gradle.rust.tasks
 
-import com.jtitor.plugin.gradle.rust.tasks.CargoTask
-import org.gradle.api.tasks.TaskAction
+import com.jtitor.plugin.gradle.rust.tasks.TaskBase
 
 class RustFormat extends TaskBase {
 	//This doesn't have all of the flags
