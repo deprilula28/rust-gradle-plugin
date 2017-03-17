@@ -5,9 +5,55 @@ import com.jtitor.plugin.gradle.test.TestBase
 
 @Slf4j
 class RustPluginTest extends TestBase {
-	//TODO
-	def "Test plugin functionality"() {
-		setup:
-		log.warn(this.class.toString() + " does not have its unit test implemented!")
+	File testProjectDir
+
+	def setup() {
+		testProjectDir = File("dummy-project")
 	}
+
+	def runWithTask(String taskName) {
+		return GradleRunner.create()
+		.withProjectDir(testProjectDir.getAbsoluteFile())
+		.withArguments(taskName)
+		.withPluginClasspath()
+		.build()
+	}
+	
+	def "Test build functionality"() {
+		when:
+		//Try to build a project using the tasks.
+		def result = runWithTask("rustBuild")
+
+		then:
+		result.task(":rustBuild").outcome == SUCCESS
+	}
+
+	def "Test run functionality"() {
+		when:
+		def result = runWithTask("rustRun")
+
+		then:
+		result.output.contains("Rust works!")
+		result.task(":rustRun").outcome == SUCCESS
+	}
+
+	//No unit tests are implemented on the dummy...
+	def "Test test functionality"() {
+		when:
+		def result = runWithTask("rustTest")
+
+		then:
+		result.task(":rustTest").outcome == SUCCESS
+	}
+
+	//RustFormat isn't fully implemented yet.
+	/*
+	def "Test format functionality"() {
+		when:
+		def result = runWithTask("rustFormat")
+
+		then:
+		result.task(":rustFormat").outcome == SUCCESS
+	}
+	*/
 }

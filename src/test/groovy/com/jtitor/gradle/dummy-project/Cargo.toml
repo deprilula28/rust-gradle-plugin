@@ -1,0 +1,4 @@
+[package]
+name = "dummy-project"
+version = "0.0.1"
+authors = [ "Me <me@me.me>" ]
