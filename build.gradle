@@ -23,11 +23,13 @@ repositories {
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    //compile 'org.codehaus.groovy:groovy-all:2.3.11'
     compile gradleApi()
     compile localGroovy()
 
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    //Also add testing framework.
+    testCompile gradleTestKit()
+    testCompile 'junit:junit:4.12'
 }
 
 pluginBundle {
