@@ -30,9 +30,8 @@ dependencies {
     //Add logging frameworks.
     compile 'org.slf4j:slf4j-api:1.6.4'
 
-    logbackVersion = '1.0.0'
-    testRuntime group: 'ch.qos.logback', name:'logback-classic', version: logbackVersion
-    testRuntime group: 'ch.qos.logback', name:'logback-core', version: logbackVersion
+    testRuntime 'ch.qos.logback:logback-classic:1.0.0'
+    testRuntime 'ch.qos.logback:logback-core:1.0.0'
 
     //Also add testing framework.
     testCompile gradleTestKit()
