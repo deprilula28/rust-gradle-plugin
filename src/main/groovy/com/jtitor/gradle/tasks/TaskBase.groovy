@@ -11,15 +11,13 @@ class TaskBase extends DefaultTask {
 	Adds verbose output.
 	If true, this will call Cargo with the --verbose flag.
 	*/
-	@Input
-	Boolean verbose = false
+	boolean verbose = false
 
 	/**
 	Disables all standard output.
 	If true, this will call Cargo with the --quiet flag.
 	*/
-	@Input
-	Boolean quiet = false
+	boolean quiet = false
 
 	void logTaskStart(String taskName) {
 		String toPrint = "Starting Cargo task: " + taskName

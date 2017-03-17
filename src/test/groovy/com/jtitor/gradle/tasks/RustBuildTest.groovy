@@ -14,7 +14,7 @@ class RustBuildTest extends TestBase {
 	//TODO
 	def "Test RustBuild functionality"() {
 		setup:
-		def taskInstance = new RustBuild()
+		def taskInstance = dummyProject.task("rustBuild", type:RustBuild)
 
 		when:
 		def actualDefaultInvocation = taskInstance.invocationForAction()

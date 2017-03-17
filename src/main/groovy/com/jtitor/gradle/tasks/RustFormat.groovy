@@ -1,5 +1,6 @@
 package com.jtitor.plugin.gradle.rust.tasks
 
+import org.gradle.api.tasks.TaskAction
 import com.jtitor.plugin.gradle.rust.tasks.TaskBase
 
 class RustFormat extends TaskBase {
@@ -10,7 +11,7 @@ class RustFormat extends TaskBase {
 	Generates the Cargo string corresponding to the format action,
 	with flags set to the task's values.
 	*/	
-	private String invocationForAction() {
+	String invocationForAction() {
 		StringBuilder result = new StringBuilder("cargo fmt")
 		if (verbose) {
 			result.append(" --verbose")

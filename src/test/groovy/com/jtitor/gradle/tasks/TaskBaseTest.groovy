@@ -7,6 +7,7 @@ import com.jtitor.plugin.gradle.test.TestBase
 class TaskBaseTest extends TestBase {
 	//TODO
 	def "Test TaskBase functionality"() {
+		setup:
 		log.warn(this.class.toString() + " does not have its unit test implemented!")
 	}
 }

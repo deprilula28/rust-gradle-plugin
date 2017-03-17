@@ -17,13 +17,15 @@ apply plugin: 'groovy'
 apply plugin: 'java'
 
 sourceCompatibility = 1.6
+targetCompatibility = 1.6
 
 repositories {
     jcenter()
 }
 
 dependencies {
-    //compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    compile 'org.codehaus.groovy:groovy-all:2.4.7'
+    testCompile 'org.codehaus.groovy:groovy:2.4.7'
     compile gradleApi()
     compile localGroovy()
 

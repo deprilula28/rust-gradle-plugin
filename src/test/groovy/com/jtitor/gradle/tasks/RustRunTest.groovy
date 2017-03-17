@@ -11,7 +11,7 @@ class RustRunTest extends TestBase {
 	//TODO
 	def "Test RustRun functionality"() {
 		setup:
-		def taskInstance = new RustRun()
+		def taskInstance = dummyProject.task("rustRun", type:RustRun)
 
 		when:
 		def actualDefaultInvocation = taskInstance.invocationForAction()

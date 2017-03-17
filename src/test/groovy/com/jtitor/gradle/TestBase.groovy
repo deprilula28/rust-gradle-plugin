@@ -1,12 +1,15 @@
 package com.jtitor.plugin.gradle.test
 
 import spock.lang.Specification
+import org.gradle.api.Project
+import org.gradle.testfixtures.ProjectBuilder
 
 class TestBase extends Specification {
-	Project buildDefaultProject()
+	Project dummyProject;
+
+	public void setup()
 	{
-		Project project = ProjectBuilder.builder().build()
-		project.pluginManager.apply 'org.jtitor.rust'
-		return project
+		dummyProject = ProjectBuilder.builder().build()
+		dummyProject.pluginManager.apply 'com.jtitor.rust'
 	}
 }

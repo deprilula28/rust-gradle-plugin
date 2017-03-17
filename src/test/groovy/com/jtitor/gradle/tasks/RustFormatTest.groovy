@@ -11,7 +11,7 @@ class RustFormatTest extends TestBase {
 	//TODO
 	def "Test RustFormat functionality"() {
 		setup:
-		def taskInstance = new RustFormat()
+		def taskInstance = dummyProject.task("rustFormat", type:RustFormat)
 
 		when:
 		def actualDefaultInvocation = taskInstance.invocationForAction()
