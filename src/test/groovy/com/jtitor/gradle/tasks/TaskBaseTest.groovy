@@ -1,14 +1,12 @@
 package com.jtitor.plugin.gradle.test
 
+import groovy.util.logging.Slf4j
 import com.jtitor.plugin.gradle.test.TestBase
 
-/**
-Base class for tasks.
-*/
+@Slf4j
 class TaskBaseTest extends TestBase {
 	//TODO
-	@Test
-	public void runTest() {
-		assertTrue(true)
+	def "Test TaskBase functionality"() {
+		log.warn(this.class.toString() + " does not have its unit test implemented!")
 	}
 }

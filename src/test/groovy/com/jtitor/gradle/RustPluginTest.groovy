@@ -1,13 +1,12 @@
 package com.jtitor.plugin.gradle.test
 
+import groovy.util.logging.Slf4j
 import com.jtitor.plugin.gradle.test.TestBase
 
+@Slf4j
 class RustPluginTest extends TestBase {
-	/*!
-	An example unit test.
-	*/
-	@Test
-	public void exampleTest() {
-		assertTrue(true)
+	//TODO
+	def "Test plugin functionality"() {
+		log.warn(this.class.toString() + " does not have its unit test implemented!")
 	}
 }

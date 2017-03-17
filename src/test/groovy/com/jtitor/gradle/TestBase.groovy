@@ -1,6 +1,8 @@
 package com.jtitor.plugin.gradle.test
 
-class TestBase {
+import spock.lang.Specification
+
+class TestBase extends Specification {
 	Project buildDefaultProject()
 	{
 		Project project = ProjectBuilder.builder().build()

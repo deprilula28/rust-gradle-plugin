@@ -1,16 +1,24 @@
 package com.jtitor.plugin.gradle.test
 
+import groovy.util.logging.Slf4j
 import com.jtitor.plugin.gradle.test.TestBase
+import com.jtitor.plugin.gradle.rust.tasks.RustRun
 
-/**
-Runs cargo run on the given project.
-*/
+@Slf4j
 class RustRunTest extends TestBase {
+	String expectedDefaultInvocation = "cargo run"
+
 	//TODO
-	@Test
-	public void runTest() {
+	def "Test RustRun functionality"() {
+		setup:
+		def taskInstance = new RustRun()
+
+		when:
+		def actualDefaultInvocation = taskInstance.invocationForAction()
+
+		then:
 		//Test that the default invocation
 		//matches "cargo run".
-		assertTrue(true)
+		actualDefaultInvocation == expectedDefaultInvocation
 	}
 }
