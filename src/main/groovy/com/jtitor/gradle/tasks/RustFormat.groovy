@@ -11,16 +11,16 @@ class RustFormat extends TaskBase {
 	Generates the Cargo string corresponding to the format action,
 	with flags set to the task's values.
 	*/	
-	String invocationForAction() {
-		StringBuilder result = new StringBuilder("cargo fmt")
+	def invocationForAction() {
+		def result = ["cargo", "fmt"]
 		if (verbose) {
-			result.append(" --verbose")
+			result << "--verbose"
 		}
 		if (quiet) {
-			result.append(" --quiet")
+			result << "--quiet"
 		}
 
-		return result.toString()
+		return result
 	}
 
 	/**

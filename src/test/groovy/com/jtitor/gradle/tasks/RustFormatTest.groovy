@@ -6,7 +6,7 @@ import com.jtitor.plugin.gradle.rust.tasks.RustFormat
 
 @Slf4j
 class RustFormatTest extends TestBase {
-	String expectedDefaultInvocation = "cargo fmt"
+	def expectedDefaultInvocation = ["cargo", "fmt"]
 
 	//TODO
 	def "Test RustFormat functionality"() {

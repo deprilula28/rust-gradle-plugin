@@ -14,7 +14,7 @@ buildscript {
 
 apply plugin: "com.gradle.plugin-publish"
 apply plugin: 'groovy'
-apply plugin: 'java'
+apply plugin: 'java-gradle-plugin'
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
@@ -37,7 +37,9 @@ dependencies {
 
     //Also add testing framework.
     testCompile gradleTestKit()
-    testCompile "org.spockframework:spock-core:1.1-groovy-2.4-rc-2"
+    testCompile("org.spockframework:spock-core:1.1-groovy-2.4-rc-2") {
+        exclude module: 'groovy-all'
+    }
 }
 
 pluginBundle {

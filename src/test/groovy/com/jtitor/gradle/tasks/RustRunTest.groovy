@@ -6,7 +6,7 @@ import com.jtitor.plugin.gradle.rust.tasks.RustRun
 
 @Slf4j
 class RustRunTest extends TestBase {
-	String expectedDefaultInvocation = "cargo run"
+	def expectedDefaultInvocation = ["cargo", "run"]
 
 	//TODO
 	def "Test RustRun functionality"() {

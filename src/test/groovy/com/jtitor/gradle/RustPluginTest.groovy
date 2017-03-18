@@ -1,5 +1,7 @@
 package com.jtitor.plugin.gradle.test
 
+import org.gradle.testkit.runner.TaskOutcome
+import org.gradle.testkit.runner.GradleRunner
 import groovy.util.logging.Slf4j
 import com.jtitor.plugin.gradle.test.TestBase
 
@@ -8,7 +10,7 @@ class RustPluginTest extends TestBase {
 	File testProjectDir
 
 	def setup() {
-		testProjectDir = File("dummy-project")
+		testProjectDir = new File("src/test/dummy-project")
 	}
 
 	def runWithTask(String taskName) {
@@ -22,38 +24,38 @@ class RustPluginTest extends TestBase {
 	def "Test build functionality"() {
 		when:
 		//Try to build a project using the tasks.
-		def result = runWithTask("rustBuild")
+		def result = runWithTask("rustBuildTop")
 
 		then:
-		result.task(":rustBuild").outcome == SUCCESS
+		result.task(":rustBuildTop").outcome == TaskOutcome.SUCCESS
 	}
 
 	def "Test run functionality"() {
 		when:
-		def result = runWithTask("rustRun")
+		def result = runWithTask("rustRunTop")
 
 		then:
 		result.output.contains("Rust works!")
-		result.task(":rustRun").outcome == SUCCESS
+		result.task(":rustRunTop").outcome == TaskOutcome.SUCCESS
 	}
 
 	//No unit tests are implemented on the dummy...
 	def "Test test functionality"() {
 		when:
-		def result = runWithTask("rustTest")
+		def result = runWithTask("rustTestTop")
 
 		then:
-		result.task(":rustTest").outcome == SUCCESS
+		result.task(":rustTestTop").outcome == TaskOutcome.SUCCESS
 	}
 
 	//RustFormat isn't fully implemented yet.
 	/*
 	def "Test format functionality"() {
 		when:
-		def result = runWithTask("rustFormat")
+		def result = runWithTask("rustFormatTop")
 
 		then:
-		result.task(":rustFormat").outcome == SUCCESS
+		result.task(":rustFormatTop").outcome == TaskOutcome.SUCCESS
 	}
 	*/
 }

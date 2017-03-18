@@ -9,15 +9,15 @@ Base class for tasks that call out to Cargo.
 */
 abstract class CargoTask extends TaskBase {
 	//Define flag constants...
-	public static final String FLAG_VERY_VERBOSE = " -vv"
-	public static final String FLAG_VERBOSE = " --verbose"
-	public static final String FLAG_QUIET = " --quiet"
-	public static final String FLAG_FROZEN = " --frozen"
-	public static final String FLAG_LOCKED = " --locked"
-	public static final String FLAG_RELEASE = " --release"
-	public static final String FLAG_PACKAGE = " --package "
-	public static final String FLAG_TARGET = " --target "
-	public static final String FLAG_MANIFEST_PATH = " --manifest-path "
+	public static final String FLAG_VERY_VERBOSE = "-vv"
+	public static final String FLAG_VERBOSE = "--verbose"
+	public static final String FLAG_QUIET = "--quiet"
+	public static final String FLAG_FROZEN = "--frozen"
+	public static final String FLAG_LOCKED = "--locked"
+	public static final String FLAG_RELEASE = "--release"
+	public static final String FLAG_PACKAGE = "--package"
+	public static final String FLAG_TARGET = "--target"
+	public static final String FLAG_MANIFEST_PATH = "--manifest-path"
 
 	//Inputs here.
 	/**
@@ -81,41 +81,41 @@ abstract class CargoTask extends TaskBase {
 	Generates the Cargo string corresponding to the given action,
 	with flags set to the task's values.
 	*/	
-	String invocationForAction() {
-		StringBuilder result = new StringBuilder("cargo ")
-		result.append(actionName())
+	def invocationForAction() {
+		def result = ["cargo"]
+		result << actionName()
 		if(veryVerbose) {
-			result.append(FLAG_VERY_VERBOSE)
+			result << FLAG_VERY_VERBOSE
 		}
 		else if (verbose) {
-			result.append(FLAG_VERBOSE)
+			result << FLAG_VERBOSE
 		}
 		if (quiet) {
-			result.append(FLAG_QUIET)
+			result << FLAG_QUIET
 		}
 		if(frozen) {
-			result.append(FLAG_FROZEN)
+			result << FLAG_FROZEN
 		}
 		if(locked) {
-			result.append(FLAG_LOCKED)
+			result << FLAG_LOCKED
 		}
 		if(release) {
-			result.append(FLAG_RELEASE)
+			result << FLAG_RELEASE
 		}
 		if(cargoPackage?.trim()) {
-			result.append(FLAG_PACKAGE)
-			result.append(cargoPackage)
+			result << FLAG_PACKAGE
+			result << cargoPackage
 		}
 		if(target?.trim()) {
-			result.append(FLAG_TARGET)
-			result.append(target)
+			result << FLAG_TARGET
+			result << target
 		}
 		if(manifestPath?.trim()) {
-			result.append(FLAG_MANIFEST_PATH)
-			result.append(manifestPath)
+			result << FLAG_MANIFEST_PATH
+			result << manifestPath
 		}
 
-		return result.toString()
+		return result
 	}
 
 	/**

@@ -9,7 +9,7 @@ Runs cargo build on the given project.
 */
 @Slf4j
 class RustBuildTest extends TestBase {
-	String expectedDefaultInvocation = "cargo build"
+	def expectedDefaultInvocation = ["cargo", "build"]
 
 	//TODO
 	def "Test RustBuild functionality"() {

@@ -1,0 +1,7 @@
+//Describes tasks to perform during build.
+//Any dependencies should be specified by the task.
+plugins {
+	id "com.jtitor.rust"
+}
+
+apply plugin: "com.jtitor.rust"
