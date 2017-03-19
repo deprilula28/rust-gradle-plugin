@@ -20,42 +20,42 @@ class RustPluginTest extends TestBase {
 		.withPluginClasspath()
 		.build()
 	}
-	
+
 	def "Test build functionality"() {
 		when:
 		//Try to build a project using the tasks.
-		def result = runWithTask("rustBuildTop")
+		def result = runWithTask("rustBuild")
 
 		then:
-		result.task(":rustBuildTop").outcome == TaskOutcome.SUCCESS
+		result.task(":rustBuild").outcome == TaskOutcome.SUCCESS
 	}
 
 	def "Test run functionality"() {
 		when:
-		def result = runWithTask("rustRunTop")
+		def result = runWithTask("rustRun")
 
 		then:
 		result.output.contains("Rust works!")
-		result.task(":rustRunTop").outcome == TaskOutcome.SUCCESS
+		result.task(":rustRun").outcome == TaskOutcome.SUCCESS
 	}
 
 	//No unit tests are implemented on the dummy...
 	def "Test test functionality"() {
 		when:
-		def result = runWithTask("rustTestTop")
+		def result = runWithTask("rustTest")
 
 		then:
-		result.task(":rustTestTop").outcome == TaskOutcome.SUCCESS
+		result.task(":rustTest").outcome == TaskOutcome.SUCCESS
 	}
 
 	//RustFormat isn't fully implemented yet.
 	/*
 	def "Test format functionality"() {
 		when:
-		def result = runWithTask("rustFormatTop")
+		def result = runWithTask("rustFormat")
 
 		then:
-		result.task(":rustFormatTop").outcome == TaskOutcome.SUCCESS
+		result.task(":rustFormat").outcome == TaskOutcome.SUCCESS
 	}
 	*/
 }

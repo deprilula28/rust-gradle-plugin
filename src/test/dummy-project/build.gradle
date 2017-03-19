@@ -1,7 +1,39 @@
 //Describes tasks to perform during build.
 //Any dependencies should be specified by the task.
-plugins {
-	id "com.jtitor.rust"
+buildscript {
+	//Provide a direct path to the plugin.
+	dependencies {
+		classpath files('../../../build/libs/rust-gradle-plugin-0.1.1.jar')
+	}
 }
 
 apply plugin: "com.jtitor.rust"
+
+//List a derived project.
+task rustBuild(type:RustBuild) {
+	//Metadata is placed inside the task.
+	//Everything in this scope is evaluated no matter what task is requested.
+	group 'project-global'
+	description 'Tries to perform a cargo build by deriving from the RustBuild task type.'
+}
+
+task rustRun(type:RustRun) {
+	//Metadata is placed inside the task.
+	//Everything in this scope is evaluated no matter what task is requested.
+	group 'project-global'
+	description 'Tries to perform a cargo run by deriving from the RustRun task type.'
+}
+
+task rustFormat(type:RustFormat) {
+	//Metadata is placed inside the task.
+	//Everything in this scope is evaluated no matter what task is requested.
+	group 'project-global'
+	description 'Tries to perform a cargo fmt by deriving from the RustFormat task type.'
+}
+
+task rustTest(type:RustTest) {
+	//Metadata is placed inside the task.
+	//Everything in this scope is evaluated no matter what task is requested.
+	group 'project-global'
+	description 'Tries to perform a cargo test by deriving from the RustTest task type.'
+}
