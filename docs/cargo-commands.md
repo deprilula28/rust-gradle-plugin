@@ -1,20 +1,9 @@
-# Notes on Cargo/Rust Behavior
-Rust output always goes in the following format:
-
-```
-/target                             Root folder for output
-    /release, /debug, /dev, ...     Configuration-specific output
-    /doc                            Documentation
-```
-
-# Needed Tasks
-In general, output from commands should always be kept as task output.
-We need some basic tasks:
+# Stock with Cargo
 ## Build
 Generates crate artifacts.
 ### Command
 `cargo build`
-### Command Parameters
+### Command Options
 * -p SPEC, --package SPEC ...  Package to build
 * -j N, --jobs N               Number of parallel jobs, defaults to # of CPUs
 * --lib                        Build only this package's library
@@ -34,11 +23,7 @@ Generates crate artifacts.
 * --message-format FMT         Error format: human, json [default: human]
 * --frozen                     Require Cargo.lock and cache are up to date
 * --locked                     Require Cargo.lock is up to date
-### Expected Results
-* Output folder /target/... actually contains artifacts.
-* Said artifacts are actually modified if a prior version existed on disk.
-#### Failure Only
-* Task throws an exception.
+* --all                        Build all crates in workspace (new to 1.16)
 
 ## Test
 Runs test functions specified in source.
@@ -47,7 +32,7 @@ Runs test functions specified in source.
 ### Needed Parameters
 * String `filter`: For example, `cargo test shenme` will run any tests that have `shenme` in the name.
 Default is blank.
-### Command Parameters
+### Command Options
 * --lib                        Test only this package's library
 * --doc                        Test only this library's documentation
 * --bin NAME                   Test only the specified binary
@@ -71,40 +56,11 @@ Default is blank.
 * --no-fail-fast               Run all tests regardless of failure
 * --frozen                     Require Cargo.lock and cache are up to date
 * --locked                     Require Cargo.lock is up to date
-### Expected Results
-* Test results are listed to output.
-#### Failure Only
-* Task throws an exception.
-
-## Format
-Reformats source to common style guidelines.
-This isn't part of cargo out of the box; it requires a `cargo install rustfmt` if it's not already there.
-### Command
-`cargo fmt`
-### Needed Parameters
-TODO
-### Command Parameters
-#### Cargo Fmt
-* -q, --quiet         no output printed to stdout
-* -v, --verbose       use verbose output
-#### Rustfmt
-* --write-mode [replace|overwrite|display|diff|coverage|checkstyle]: Mode to write in (not usable when piping from stdin)
-* --skip-children: Don't reformat child modules
-* --config-help: Show details of rustfmt configuration options
-* --config-path [Path for the configuration file]: Recursively searches the given path for the rustfmt.toml config file. If not found reverts to the input file path
-* --file-lines JSON: Format specified line ranges. See README for more detail on the JSON format.
-### Command Details
-This utility formats all bin and lib files of the current crate using rustfmt. Arguments after `--` are passed to rustfmt.
-### Expected Results
-#### Failure Only
-* Task throws an exception.
 
 ## Run
 ### Command
 `cargo run`
-### Needed Parameters
-TODO
-### Command Parameters
+### Command Options
 * --bin NAME              Name of the bin target to run
 * --example NAME          Name of the example target to run
 * -j N, --jobs N          Number of parallel jobs, defaults to # of CPUs
@@ -129,19 +85,11 @@ and `--example` specifies the example target to run. At most one of `--bin` or
 All of the trailing arguments are passed to the binary to run. If you're passing
 arguments to both Cargo and the binary, the ones after `--` go to the binary,
 the ones before go to Cargo.
-### Expected Results
-Program output is printed to output.
-#### Failure Only
-Task throws an exception.
 
-# Optional Tasks
-Additionally, we would like:
 ## Build Documentation
 ### Command
 `cargo doc`
-### Needed Parameters
-TODO
-### Command Parameters
+### Command Options
 * --open                       Opens the docs in a browser after the operation
 * -p SPEC, --package SPEC ...  Package to document
 * --no-deps                    Don't build documentation for dependencies
@@ -160,11 +108,7 @@ TODO
 * --message-format FMT         Error format: human, json [default: human]
 * --frozen                     Require Cargo.lock and cache are up to date
 * --locked                     Require Cargo.lock is up to date
-### Expected Results
-* Output folder /target/... actually contains documentation artifacts.
-* Said artifacts are actually modified if a prior version existed on disk.
-#### Failure Only
-* Task throws an exception.
+* --all                        Build documentation for all crates in workspace (new to 1.16)
 
 ## Benchmark
 ### Command
@@ -172,7 +116,7 @@ TODO
 ### Needed Parameters
 * String `filter`: For example, `cargo bench shenme` will benchmark any functions that have `shenme` in the name.
 Default is blank.
-### Command Parameters
+### Command Options
 * --lib                        Benchmark only this package's library
 * --bin NAME                   Benchmark only the specified binary
 * --example NAME               Benchmark only the specified example
@@ -192,18 +136,12 @@ Default is blank.
 * --message-format FMT         Error format: human, json [default: human]
 * --frozen                     Require Cargo.lock and cache are up to date
 * --locked                     Require Cargo.lock is up to date
-### Expected Results
-* Benchmark results are printed to output.
-#### Failure Only
-* Task throws an exception. This could happen if a rebuild is needed and the rebuild failed.
 
 ## Clean
 Removes output artifacts.
 ### Command
 `cargo clean`
-### Needed Parameters
-TODO
-### Command Parameters
+### Command Options
 * -p SPEC, --package SPEC ...  Package to clean artifacts for
 * --manifest-path PATH         Path to the manifest to the package to clean
 * --target TRIPLE              Target triple to clean output for (default all)
@@ -213,18 +151,12 @@ TODO
 * --color WHEN                 Coloring: auto, always, never
 * --frozen                     Require Cargo.lock and cache are up to date
 * --locked                     Require Cargo.lock is up to date
-### Expected Results
-* /target/... is deleted.
-#### Failure Only
-* Task throws an exception.
 
 ## Publish
 Publishes crate to a host.
 ### Command
 `cargo publish`
-### Needed Parameters
-TODO
-### Command Parameters
+### Command Options
 * --host HOST              Host to upload the package to
 * --token TOKEN            Token to use when uploading
 * --no-verify              Don't verify package tarball before publish
@@ -237,17 +169,12 @@ TODO
 * --color WHEN             Coloring: auto, always, never
 * --frozen                 Require Cargo.lock and cache are up to date
 * --locked                 Require Cargo.lock is up to date
-### Expected Results
-#### Failure Only
-* Task throws an exception.
 
 ## Update
 Updates dependencies as specified in Cargo.lock.
 ### Command
 `cargo update`
-### Needed Parameters
-TODO
-### Command Parameters
+### Command Options
 * -p SPEC, --package SPEC ...  Package to update
 * --aggressive                 Force updating all dependencies of (name) as well
 * --precise PRECISE            Update a single dependency to exactly PRECISE
@@ -257,6 +184,61 @@ TODO
 * --color WHEN                 Coloring: auto, always, never
 * --frozen                     Require Cargo.lock and cache are up to date
 * --locked                     Require Cargo.lock is up to date
-### Expected Results
-#### Failure Only
-* Task throws an exception.
+
+# 1.16 and Up
+
+## Check
+Runs compilation checks on a project and all of its dependencies, but does not build a binary; this tends to be much faster than `cargo build`.
+### Command
+`cargo check`
+### Needed Parameters
+* TODO
+### Command Options
+* h, --help                   Print this message
+* p SPEC, --package SPEC ...  Package to check
+* j N, --jobs N               Number of parallel jobs, defaults to # of CPUs
+* -lib                        Check only this package's library
+* -bin NAME                   Check only the specified binary
+* -example NAME               Check only the specified example
+* -test NAME                  Check only the specified test target
+* -bench NAME                 Check only the specified benchmark target
+* -release                    Check artifacts in release mode, with optimizations
+* -features FEATURES          Space-separated list of features to also check
+* -all-features               Check all available features
+* -no-default-features        Do not check the `default` feature
+* -target TRIPLE              Check for the target triple
+* -manifest-path PATH         Path to the manifest to compile
+* v, --verbose ...            Use verbose output
+* q, --quiet                  No output printed to stdout
+* -color WHEN                 Coloring: auto, always, never
+* -message-format FMT         Error format: human, json [default: human]
+* -frozen                     Require Cargo.lock and cache are up to date
+* -locked                     Require Cargo.lock is up to date
+### Command Details
+If the --package argument is given, then SPEC is a package id specification
+which indicates which package should be built. If it is not given, then the
+current package is built. For more information on SPEC and its format, see the
+`cargo help pkgid` command.
+
+Compilation can be configured via the use of profiles which are configured in
+the manifest. The default profile for this command is `dev`, but passing
+the --release flag will use the `release` profile instead.
+
+# Provided by Extension
+## Format
+Reformats source to common style guidelines.
+This isn't part of cargo out of the box; it requires a `cargo install rustfmt` if it's not already there.
+### Command
+`cargo fmt`
+### Command Options
+#### Cargo Fmt
+* -q, --quiet         no output printed to stdout
+* -v, --verbose       use verbose output
+#### Rustfmt
+* --write-mode [replace|overwrite|display|diff|coverage|checkstyle]: Mode to write in (not usable when piping from stdin)
+* --skip-children: Don't reformat child modules
+* --config-help: Show details of rustfmt configuration options
+* --config-path [Path for the configuration file]: Recursively searches the given path for the rustfmt.toml config file. If not found reverts to the input file path
+* --file-lines JSON: Format specified line ranges. See README for more detail on the JSON format.
+### Command Details
+This utility formats all bin and lib files of the current crate using rustfmt. Arguments after `--` are passed to rustfmt.
