@@ -16,7 +16,7 @@
 /// sayHello("Hi!");
 /// ```
 fn sayHello(message: &str) {
-	println!(message);
+	println!({}, message);
 }
 
 /// Entry point for the program.
