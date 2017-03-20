@@ -6,6 +6,7 @@ import com.jtitor.plugin.gradle.rust.tasks.RustBuild
 import com.jtitor.plugin.gradle.rust.tasks.RustRun
 import com.jtitor.plugin.gradle.rust.tasks.RustTest
 import com.jtitor.plugin.gradle.rust.tasks.RustFormat
+import com.jtitor.plugin.gradle.rust.tasks.RustDoc
 
 /**
  * Created by ariel on 17/05/15.
@@ -18,6 +19,7 @@ class RustPlugin implements Plugin<Project> {
 		project.ext.RustRun = com.jtitor.plugin.gradle.rust.tasks.RustRun
 		project.ext.RustFormat = com.jtitor.plugin.gradle.rust.tasks.RustFormat
 		project.ext.RustTest = com.jtitor.plugin.gradle.rust.tasks.RustTest
+		project.ext.RustDoc = com.jtitor.plugin.gradle.rust.tasks.RustDoc
 
 		//Add global tasks.
 		project.task('rustBuildTop', type:RustBuild) {
