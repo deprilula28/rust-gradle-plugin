@@ -9,9 +9,10 @@
 ///
 /// # Parameters
 /// * `message`: The message to print.
-/// # Examples
 ///
+/// # Examples
 /// This prints "Hi!":
+///
 /// ```
 /// sayHello("Hi!");
 /// ```
