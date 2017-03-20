@@ -15,7 +15,7 @@
 /// ```
 /// sayHello("Hi!");
 /// ```
-fn sayHello(message: &str) {
+pub fn sayHello(message: &str) {
 	println!("{}", message);
 }
 
