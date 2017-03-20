@@ -24,10 +24,11 @@ task exampleBuildTask(type:RustBuild) {
   group 'example'
   description 'Builds the project as a Rust crate.'
 
-  //This also supports some of the flags
-  //used by cargo.
+  // This also supports some of the flags
+  // used by cargo...
   release = true
   quiet = true
+  // When run, this would call "cargo build --release --quiet".
 }
 ```
 
@@ -36,6 +37,8 @@ task exampleBuildTask(type:RustBuild) {
 * RustDoc: performs `cargo doc`.
 * RustRun: performs `cargo run`.
 * RustTest: performs `cargo test`.
+
+*Please note that the flags are not sanity checked*; you can set verbose and quiet at the same time without complaint from the plugin.
 
 ## How to contribute
 I didn't actually know what a pull request was until this commit, but if you want to contribute I'm okay with it.
