@@ -3,7 +3,7 @@
 buildscript {
 	//Provide a direct path to the plugin.
 	dependencies {
-		classpath files('../../../build/libs/rust-gradle-plugin-0.1.1.jar')
+		classpath files('../../../build/libs/jtitor-rust-gradle-plugin-0.1.1.jar')
 	}
 }
 

@@ -11,7 +11,7 @@ buildscript {
     }
   }
   dependencies {
-    classpath "gradle.plugin.com.jtitor:rust-gradle-plugin:0.1-SNAPSHOT"
+    classpath "gradle.plugin.com.jtitor:jtitor-rust-gradle-plugin:0.1-SNAPSHOT"
   }
 }
 
