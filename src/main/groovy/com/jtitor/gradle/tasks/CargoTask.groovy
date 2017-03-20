@@ -18,6 +18,7 @@ abstract class CargoTask extends TaskBase {
 	public static final String FLAG_PACKAGE = "--package"
 	public static final String FLAG_TARGET = "--target"
 	public static final String FLAG_MANIFEST_PATH = "--manifest-path"
+	public static final String FLAG_NO_DEPS = "--no-deps"
 
 	//Inputs here.
 	/**
@@ -71,6 +72,13 @@ abstract class CargoTask extends TaskBase {
 	String manifestPath = ""
 
 	/**
+	Decides if dependencies should also be processed.
+	If true, this will call Cargo with the --no-deps flag.
+	*/
+	@Input
+	boolean noDeps = false
+
+	/**
 	Returns the Cargo action this task represents,
 	such as build, test, or bench.
 	This should be lowercase.
@@ -113,6 +121,9 @@ abstract class CargoTask extends TaskBase {
 		if(manifestPath?.trim()) {
 			result << FLAG_MANIFEST_PATH
 			result << manifestPath
+		}
+		if(noDeps) {
+			result << FLAG_NO_DEPS
 		}
 
 		return result

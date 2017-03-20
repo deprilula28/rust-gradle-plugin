@@ -58,4 +58,12 @@ class RustPluginTest extends TestBase {
 		result.task(":rustFormat").outcome == TaskOutcome.SUCCESS
 	}
 	*/
+
+	def "Test doc functionality"() {
+		when:
+		def result = runWithTask("rustDoc")
+
+		then:
+		result.task(":rustDoc").outcome == TaskOutcome.SUCCESS
+	}
 }
