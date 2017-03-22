@@ -40,6 +40,10 @@ task exampleBuildTask(type:RustBuild) {
 
 *Please note that the flags are not sanity checked*; you can set verbose and quiet at the same time without complaint from the plugin.
 
+## Thanks to...
+
+* [ArielCabib](https://github.com/ArielCabib) for creating the original plugin.
+
 ## How to contribute
 I didn't actually know what a pull request was until this commit, but if you want to contribute I'm okay with it.
 
