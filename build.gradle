@@ -1,5 +1,5 @@
 group 'com.jtitor'
-version '0.1.1'
+version '0.1.2'
 
 buildscript {
     repositories {
@@ -8,7 +8,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath "com.gradle.publish:plugin-publish-plugin:0.9.0"
+        classpath "com.gradle.publish:plugin-publish-plugin:0.9.7"
     }
 }
 
