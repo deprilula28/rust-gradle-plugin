@@ -11,7 +11,7 @@ buildscript {
     }
   }
   dependencies {
-    classpath "gradle.plugin.com.jtitor:rust-gradle-plugin:0.1.3"
+    classpath "gradle.plugin.com.jtitor:rust-gradle-plugin:0.1.4"
   }
 }
 
