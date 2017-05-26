@@ -10,6 +10,10 @@ import com.jtitor.plugin.gradle.rust.tasks.RustDoc
 
 /**
  * Created by ariel on 17/05/15.
+ * The plugin itself. This contains some preset tasks for
+ * building, testing and running the project via Cargo
+ * in case you are using the plugin via an IDE
+ * and want to be able to connect it to a IDE hotkey.
  */
 class RustPlugin implements Plugin<Project> {
 	@Override
@@ -23,18 +27,18 @@ class RustPlugin implements Plugin<Project> {
 
 		//Add global tasks.
 		project.task('rustBuildTop', type:RustBuild) {
-			description "Builds the project."
-			group "project-global"
+			description "Builds the project through Cargo."
+			group "rust-plugin"
 		}
 	
 		project.task('rustRunTop', type:RustRun) {
-			description "Runs the project."
-			group "project-global"
+			description "Runs the project through Cargo."
+			group "rust-plugin"
 		}
 
 		project.task('rustTestTop', type:RustTest) {
-			description "Tests the project."
-			group "project-global"
+			description "Tests the project through Cargo."
+			group "rust-plugin"
 		}
 	}
 }
